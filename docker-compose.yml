@@ -1,25 +1,21 @@
 version: '3.6'
 services:
   viewer:
-    image: ohif/viewer
+    build: ./ohif/
     container_name: viewer
-    volumes:
-      - ./ohif-config.js:/usr/share/nginx/html/app-config.js:ro
-      - ./ohif-nginx.conf:/etc/nginx/conf.d/default.conf:ro
     depends_on:
       - orthanc
     ports:
       - "8080:80"
 
   orthanc:
-    image: jodogne/orthanc-plugins
+    build: ./orthanc/
     container_name: orthanc
     depends_on:
       - postgres
     volumes:
-      - ./orthanc.json:/etc/orthanc/orthanc.json:ro
-      - ./auto-index.lua:/auto-index.lua:ro
       - ./dcms:/data:ro
+
   postgres:
     image: postgres
     container_name: postgres
