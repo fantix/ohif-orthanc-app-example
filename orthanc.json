@@ -1,0 +1,22 @@
+{
+  "Name": "Orthanc inside Docker",
+  "LuaScripts": [
+    "/auto-index.lua"
+  ],
+  "Plugins": [
+    "/usr/share/orthanc/plugins",
+    "/usr/local/share/orthanc/plugins"
+  ],
+  "StorageDirectory": "/var/lib/orthanc/db",
+  "RemoteAccessAllowed": true,
+  "StoreDicom": true,
+  "PostgreSQL": {
+    "EnableIndex": true,
+    "EnableStorage": false,
+    "Host": "postgres",
+    "Port": 5432,
+    "Database": "orthanc",
+    "Username": "postgres",
+    "Password": "postgres"
+  }
+}
