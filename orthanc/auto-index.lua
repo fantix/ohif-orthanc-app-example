@@ -1,5 +1,5 @@
 function Initialize()
-    local pfile = assert(io.popen("find '/data/' -mindepth 1 -iname '*.dcm' -type f -printf '%p\\0'", 'r'))
+    local pfile = assert(io.popen("find '/data/' -mindepth 1 -iname '*.dcm' -ipath '*by-filename*' -type f -printf '%p\\0'", 'r'))
     local list = pfile:read('*a')
     pfile:close()
 
