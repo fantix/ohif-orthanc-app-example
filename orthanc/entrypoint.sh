@@ -1,6 +1,6 @@
 #!/bin/bash
 
-while ! psql -h localhost -U postgres orthanc -c 'select now()'; do sleep 1; done
+while ! psql -h postgres -U postgres orthanc -c 'select now()'; do sleep 1; done
 COUNT=0
 #
 # in gen3 /data/ presents as a mount point,

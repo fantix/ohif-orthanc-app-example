@@ -13,7 +13,7 @@
   "PostgreSQL": {
     "EnableIndex": true,
     "EnableStorage": false,
-    "Host": "localhost",
+    "Host": "postgres",
     "Port": 5432,
     "Database": "orthanc",
     "Username": "postgres",
