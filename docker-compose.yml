@@ -10,11 +10,22 @@ services:
 
   orthanc:
     build: ./orthanc/
-    container_name: orthanc
+    container_name: orthanc-s3-2
     depends_on:
       - postgres
-    volumes:
-      - ./dcms:/data:ro
+    environment:
+      - LD_LIBRARY_PATH=/usr/local/lib
+      - ORTHANC__AWS_S3_STORAGE__BUCKET_NAME
+      - ORTHANC__AWS_S3_STORAGE__REGION=
+      - ORTHANC__AWS_S3_STORAGE__ACCESS_KEY=
+      - ORTHANC__AWS_S3_STORAGE__SECRET_KEY=
+      - GDCM_PLUGIN_ENABLED=false
+      - ORTHANC__AUTHENTICATION_ENABLED=false
+      - ORTHANC__DICOM_SERVER_ENABLED=false
+      - VERBOSE_STARTUP=true
+      - VERBOSE=true
+    ports:
+      - 8042:8042
 
   postgres:
     image: postgres
