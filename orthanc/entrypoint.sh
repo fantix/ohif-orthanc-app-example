@@ -6,7 +6,7 @@ COUNT=0
 # in gen3 /data/ presents as a mount point,
 # but in docker-compose it just looks like a folder
 #
-while ! mount | grep '/data/' && [[ "$COUNT" -lt 20 ]]; do 
+while ! mount | grep '/data/' && [[ "$COUNT" -lt 20 ]]; do
   sleep 1
   COUNT=$((COUNT + 1))
 done
@@ -16,4 +16,3 @@ if [[ ! -d /data/ ]]; then
 fi
 
 Orthanc "$@"
-
