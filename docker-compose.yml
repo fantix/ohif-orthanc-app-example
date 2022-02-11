@@ -1,8 +1,13 @@
 version: '3.6'
+networks:
+  network:
+    external: true
 services:
   viewer:
     image: quay.io/cdis/ohif-viewer
     container_name: viewer
+    networks:
+      network: null
     depends_on:
       - orthanc
     ports:
@@ -11,6 +16,8 @@ services:
   orthanc:
     build: ./orthanc/
     container_name: orthanc
+    networks:
+      network: null
     depends_on:
       - postgres
     volumes:
@@ -19,7 +26,12 @@ services:
   postgres:
     image: postgres
     container_name: postgres
+    networks:
+      network: null
     volumes:
-      - ~/.aws:/root/.aws:ro
-    env_file:
-      - ~/Gen3Secrets/g3auto/orthanc/dbcreds_copy
+      - ./pgdata:/var/lib/postgresql
+    environment:
+      - POSTGRES_DB=orthanc
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_HOST_AUTH_METHOD=trust
