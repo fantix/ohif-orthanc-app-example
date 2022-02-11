@@ -1,8 +1,8 @@
 version: '3.6'
-networks:
-  network:
-    external: true
 services:
+  networks:
+    network:
+      external: true
   viewer:
     image: quay.io/cdis/ohif-viewer
     container_name: viewer
