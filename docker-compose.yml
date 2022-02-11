@@ -20,6 +20,6 @@ services:
     image: postgres
     container_name: postgres
     volumes:
-      - ./pgdata:/var/lib/postgresql
+      - ~/.aws:/root/.aws:ro
     env_file:
       - ~/Gen3Secrets/g3auto/orthanc/dbcreds_copy
