@@ -6,7 +6,7 @@ RUN apt-get update && apt-get install -y postgresql-client procps curl && apt-ge
 ENTRYPOINT [ "/entrypoint.sh" ]
 CMD [ "/etc/orthanc/" ]
 
-FROM alpine:3.4
+FROM alpine:latest
 RUN apk --no-cache --update add bash curl less groff jq python py-pip && \
   pip install awscli s3cmd https://s3.amazonaws.com/cloudformation-examples/aws-cfn-bootstrap-latest.tar.gz && \
   apk del remove py-pip && \
