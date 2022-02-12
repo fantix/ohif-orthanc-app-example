@@ -6,18 +6,12 @@ RUN apt-get update && apt-get install -y postgresql-client procps curl && apt-ge
 ENTRYPOINT [ "/entrypoint.sh" ]
 CMD [ "/etc/orthanc/" ]
 
-FROM ubuntu:14.04
+FROM jenkins/jenkins:2.298
 
-RUN apt-get -y -qq update && \
-	apt-get install -y -qq curl && \
-	apt-get clean
-#
-# install jq to parse json within bash scripts
-RUN curl -o /usr/local/bin/jq http://stedolan.github.io/jq/download/linux64/jq && \
-  chmod +x /usr/local/bin/jq
+USER root
 
-# Define working directory.
-WORKDIR /data
+ENV DEBIAN_FRONTEND=noninteractive
 
-CMD ["-"]
-ENTRYPOINT ["jq"]
+# install python
+RUN set -xe && apt-get update && apt-get install -y apt-utils dnsutils python python-setuptools python-dev python-pip python3 python3-pip python3-venv build-essential zip unzip jq less vim gettext-base
+USER ramunerella
