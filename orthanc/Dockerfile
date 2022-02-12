@@ -6,7 +6,8 @@ RUN apt-get update && apt-get install -y postgresql-client procps curl && apt-ge
 ENTRYPOINT [ "/entrypoint.sh" ]
 CMD [ "/etc/orthanc/" ]
 
-FROM jenkins/jenkins:2.298
-USER root
-RUN set -xe && apt-get update && apt-get install -y apt-utils dnsutils python python-setuptools python-dev python-pip python3 python3-pip python3-venv build-essential zip unzip jq less vim gettext-base
-USER ramunerella
+FROM alpine:3.4
+RUN apk --no-cache --update add bash curl less groff jq python py-pip && \
+  pip install awscli s3cmd https://s3.amazonaws.com/cloudformation-examples/aws-cfn-bootstrap-latest.tar.gz && \
+  apk del remove py-pip && \
+  mkdir /root/.aws
